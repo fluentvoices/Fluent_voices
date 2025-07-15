@@ -196,12 +196,13 @@ body {
 
 .card {
     background-color: #fff;
-    padding: 0;
+    padding: 0; /* Padding dihilangkan dari sini */
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 12px; /* Sudut lebih tumpul */
+    border-radius: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    overflow: hidden; /* Tambahkan ini untuk memastikan gambar tidak keluar dari sudut rounded */
 }
 
 .card:hover {
