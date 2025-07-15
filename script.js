@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = Object.fromEntries(formData.entries());
 
             // 4. Mengirim data ke server backend menggunakan Fetch API
-            fetch('http://localhost:3000/daftar', {
+            fetch('https://fluent-voice-backend.onrender.com/daftar', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
