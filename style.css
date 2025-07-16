@@ -185,6 +185,14 @@ body {
     background-color: var(--blue);
 }
 
+.section-subheadline {
+    max-width: 800px;
+    /* Menghilangkan margin negatif dan memberi jarak normal */
+    margin: 0 auto 3rem auto; 
+    color: #555;
+    line-height: 1.7;
+}
+
 /* Program Cards */
 .program-cards {
     display: grid;
@@ -248,8 +256,10 @@ body {
 }
 
 .testimonial-card {
-    background-color: var(--white);
-    align-items: center;
+    padding: 2.5rem; 
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
     text-align: center;
 }
 
@@ -260,19 +270,21 @@ body {
     margin-bottom: 1.5rem;
     object-fit: cover;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    flex-shrink: 0;
 }
 
 .testimonial-text {
     font-style: italic;
     color: #555;
     margin-bottom: 1rem;
-    flex-grow: 1; /* Agar tinggi card sama */
+    flex-grow: 1; 
 }
 
 .testimonial-name {
     font-weight: 600;
     color: var(--dark-text);
 }
+
 
 /* --- Formulir Pendaftaran --- */
 .registration-form {
@@ -579,4 +591,282 @@ body {
 
 .card-content p {
     flex-grow: 1; /* Mendorong judul dan tombol ke atas dan bawah */
+}
+
+/* --- Gaya untuk Bagian 'Why Fluent Voices' --- */
+.why-us-headline {
+    font-size: 2.2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    color: var(--dark-text);
+}
+.why-us-headline::after {
+    display: none; /* Menghilangkan garis bawah standar h2 untuk judul ini */
+}
+
+.why-us-subheadline {
+    font-size: 1.15rem;
+    max-width: 650px;
+    margin: 0 auto 3.5rem auto;
+    color: #555;
+}
+
+.comparison-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem;
+    text-align: left;
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+.problem-column,
+.solution-column {
+    padding: 2.5rem;
+    border-radius: 12px;
+}
+
+.problem-column {
+    background-color: #fff1f1;
+    border: 1px solid #ffdede;
+}
+
+.solution-column {
+    background-color: #f0f6ff;
+    border: 1px solid #d9e7ff;
+}
+
+.comparison-container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 600;
+}
+
+.problem-column h3 {
+    color: #c53030;
+}
+
+.solution-column h3 {
+    color: var(--blue);
+}
+
+.comparison-container .icon-wrapper {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.comparison-container .icon-wrapper svg {
+    width: 100%;
+    height: 100%;
+}
+
+.icon-wrapper.cross svg {
+    fill: #e53e3e;
+}
+
+.icon-wrapper.check svg {
+    fill: var(--blue);
+}
+
+.comparison-container p {
+    margin: 0;
+    line-height: 1.6;
+    color: #333;
+}
+
+.point-list {
+    list-style: none;
+    padding: 0;
+}
+
+.point-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+.point-list li:last-child {
+    margin-bottom: 0;
+}
+
+.solution-column .solution-intro {
+    margin-bottom: 1.5rem;
+    line-height: 1.7;
+    color: #444;
+}
+
+.solution-column .target-audience {
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin: 1.5rem 0;
+    border: 1px solid #d9e7ff;
+}
+
+.solution-column .target-audience p {
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.solution-column .target-audience .point-list li p {
+    font-weight: normal; 
+    margin-bottom: 0;
+}
+
+.icon-wrapper.bullet svg {
+    fill: var(--blue);
+}
+
+.solution-column .core-message {
+    font-weight: 500;
+    line-height: 1.7;
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background-color: #e3ebf7;
+    border-radius: 8px;
+    text-align: center;
+}
+
+
+/* --- Media Query untuk Responsivitas Bagian Baru --- */
+@media (max-width: 992px) {
+    .comparison-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .why-us-headline {
+        font-size: 1.8rem;
+    }
+    .why-us-subheadline {
+        font-size: 1rem;
+    }
+    .problem-column,
+    .solution-column {
+        padding: 1.5rem;
+    }
+}
+
+/* --- BAGIAN HARGA --- */
+
+.pricing-cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+    align-items: stretch; 
+    margin-top: 3rem;
+}
+
+.price-card {
+    background-color: var(--white);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 12px;
+    padding: 2.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative; 
+    overflow: hidden; 
+}
+
+.price-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 15px 30px rgba(0, 68, 241, 0.1);
+}
+
+.price-card h3 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--blue);
+    margin-bottom: 0.5rem;
+}
+
+.price-card > p { 
+    color: #555;
+    margin-bottom: 1.5rem;
+    min-height: 50px; 
+}
+
+.price-option {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 1.25rem 0;
+    border-bottom: 1px solid #f0f2f5;
+}
+.price-option:first-of-type {
+    border-top: 1px solid #f0f2f5;
+}
+
+.option-name {
+    font-weight: 600;
+    font-size: 1.1rem;
+    color: var(--dark-text);
+}
+
+.option-price {
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: var(--dark-text);
+}
+
+.option-price small {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #666;
+    margin-left: 0.25rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin: 1.5rem 0;
+    flex-grow: 1; 
+}
+
+.features-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    color: #333;
+}
+
+.features-list li svg {
+    width: 20px;
+    height: 20px;
+    fill: var(--blue);
+    flex-shrink: 0;
+}
+
+.price-card .cta-button {
+    margin-top: auto; 
+    text-align: center;
+    width: 100%;
+}
+
+.price-card.popular {
+    border-color: var(--blue);
+    border-width: 2px;
+}
+
+.popular-badge {
+    position: absolute;
+    width: 200px; 
+    padding: 8px 0; 
+    background-color: var(--blue);
+    color: var(--white);
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 68, 241, 0.2);
+    top: 30px;
+    right: -60px;
+    transform: rotate(45deg);
 }
