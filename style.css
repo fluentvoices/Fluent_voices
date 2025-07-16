@@ -1026,3 +1026,25 @@ body {
 .price-card.active-z {
     z-index: 20;
 }
+
+/* SOLUSI: Sembunyikan pita "Populer" saat dropdown menu aktif */
+.price-card.dropdown-active .popular-badge {
+    display: none;
+}
+
+/* Style untuk highlight fitur yang berbeda di kartu harga */
+.features-list .feature-highlight {
+    background-color: #f0f6ff;
+    padding: 0.75rem;
+    margin: 0.5rem -0.75rem;
+    border-radius: 8px;
+    border: 1px solid #d9e7ff;
+}
+
+.features-list .feature-highlight span {
+    line-height: 1.5;
+}
+
+.features-list .feature-highlight strong {
+    color: var(--blue);
+}
