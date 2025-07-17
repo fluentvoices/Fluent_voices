@@ -18,6 +18,40 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
+    // --- Bagian Countdown Timer (Versi Revisi) ---
+    // Atur tanggal akhir promo (Tengah malam tanggal 20 Juli, masuk ke 21 Juli)
+    const countdownEndDate = new Date("2025-07-21T00:00:00").getTime();
+
+    const timerSpan = document.getElementById("countdown-timer");
+    const expiredTextSpan = document.getElementById("promo-expired-text");
+    const countdownContainer = document.getElementById("hero-countdown");
+
+    if (countdownContainer) {
+        const countdownInterval = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownEndDate - now;
+
+            if (distance > 0) {
+                const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                // Update elemen-elemen di dalam timer
+                document.getElementById("days").innerText = days.toString().padStart(2, '0');
+                document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
+                document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
+                document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
+            } else {
+                // Jika waktu habis
+                clearInterval(countdownInterval);
+                if (timerSpan) timerSpan.style.display = 'none';
+                if (expiredTextSpan) expiredTextSpan.style.display = 'inline';
+            }
+        }, 1000);
+    }
+
+
     // --- Bagian Pengiriman Formulir ---
     const registrationForm = document.getElementById('main-form');
     const formStatus = document.getElementById('form-status');
@@ -26,6 +60,19 @@ document.addEventListener('DOMContentLoaded', function() {
         registrationForm.addEventListener('submit', function(event) {
             event.preventDefault();
             const submitButton = registrationForm.querySelector('button[type="submit"]');
+            
+            // Validasi Kode Promo sebelum mengirim
+            const promoCodeInput = document.getElementById('kode_promo');
+            const nowForValidation = new Date();
+
+            // Cek jika kode promo yang dimasukkan adalah kode promo diskon DAN sudah lewat tanggalnya
+            if (promoCodeInput && promoCodeInput.value.toUpperCase() === 'ENGLISHYESMAGERNO' && nowForValidation > countdownEndDate) {
+                formStatus.textContent = 'Maaf, kode promo "ENGLISHYESMAGERNO" sudah tidak berlaku.';
+                formStatus.style.color = 'red';
+                return; // Batalkan pengiriman formulir
+            }
+
+            // Lanjutkan proses pengiriman jika validasi lolos
             submitButton.disabled = true;
             submitButton.textContent = 'Mengirim...';
             formStatus.textContent = '';

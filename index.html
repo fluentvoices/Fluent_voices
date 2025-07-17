@@ -59,6 +59,16 @@
     <main>
         <section id="beranda" class="hero-section">
             <div class="hero-content">
+                <div id="hero-countdown">
+                    <p>
+                        <span class="badge-promo">DISKON 50%</span>
+                        Pulkam Class berakhir dalam: 
+                        <span id="countdown-timer">
+                            <span id="days">00</span>d : <span id="hours">00</span>h : <span id="minutes">00</span>m : <span id="seconds">00</span>s
+                        </span>
+                        <span id="promo-expired-text" style="display:none;">Promo Telah Berakhir!</span>
+                    </p>
+                </div>
                 <h1>Unlock Your Potential with Fluent Voices</h1>
                 <p>from silence to confidence</p>
                 <a href="#pendaftaran" class="cta-button">Daftar Sekarang</a>
@@ -146,7 +156,10 @@
                                 </li>
                             </ul>
                         </div>
-                        
+                    </div>
+
+                    <div class="why-fluentvoices-box">
+                        <h3 class="why-fluentvoices-title"><strong>"Mengapa Fluent Voices?"</strong></h3>
                         <ul class="point-list">
                             <li>
                                 <div class="icon-wrapper check">
@@ -174,7 +187,6 @@
                             </li>
                         </ul>
                     </div>
-
                     <div class="core-message-box">
                         <p><strong>"Kami bukan sekadar tempat kursus. Kami adalah ruang aman belajar speaking dari nol, pelan-pelan tapi pasti. Tanpa janji palsu. Hanya proses yang nyata."</strong></p>
                     </div>
@@ -239,6 +251,19 @@
                         <img src="assets/testimoni/testi3.jpg" alt="Foto Testimoni Fauziyah Amalia" class="testimonial-avatar">
                         <p class="testimonial-text">"Dari pertemuan 0, coach Rihan buat kontrak belajar aja sudah seru , bahkan udah penasaran dan gak sabar nih ngikutin kelasnya, ternyata benar seaksik itu dan sesabar itu coach ngajarinnya dsn belajar bareng kita, gak nyesel sih ngikut di fluent voices ini, dan aku yakin banget aku bisa makin lancar Englishnya, latihan yang di berikan juga buat kita jdi percaya diri buat bicaraa bahasa inggris"</p>
                         <h4 class="testimonial-name">- FAUZIYAH AMALIA, KARYAWAN</h4>
+                    </div>
+
+                    <div style="grid-column: 1 / -1; display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap;">
+                        <div class="card testimonial-card">
+                            <img src="assets/testimoni/testi4.jpg" alt="Foto Testimoni Allegra Aurell Azhri" class="testimonial-avatar">
+                            <p class="testimonial-text">"HALOO!! Nama aku Ara, dari explorer C✨ Aku mau cerita sedikit perjalanan ku dengan fluent voices.. Dari awal pertemuan hingga sekarang, mentor nya sangat” disiplin dengan waktu dan selalu sabar mengajari muridnya karena mereka menerapkan prinsip “dari nol sampai fasih”, maka dari itu aku sangat beruntung bisa menjadi anggota fluent karena mengalami perkembangan yang jauhh, aku sudah bisa berbicara menggunakan bahasa inggris dan jadi jauh lebih berani ketika ada pertanyaan yang diajukan oleh coach😍 Pokoknya ga nyesallll bisa gabung dan menjadi anggota dari Fluent voices🥹"</p>
+                            <h4 class="testimonial-name">- ALLEGRA AURELL AZHRI, MAHASISWA</h4>
+                        </div>
+                        <div class="card testimonial-card">
+                            <img src="assets/testimoni/testi5.jpg" alt="Foto Testimoni Ummu Salamah" class="testimonial-avatar">
+                            <p class="testimonial-text">"Keren sih, Aku ngerasa ternyata selama ini aku cuman butuh serius dan komitmen buat belajar, dan sekarang aku nemuin tempat belajar bahasa inggris yang sangat pas buat aku yang bener” dari nol. Sekarang aku sudah bisa sekedar bertanya lagi apa, dimana, bagaimana cuaca hari ini dan banyak lagi yang sudah aku dapatkan dalam 1 bulan belajar di fluent voices. Thank you captain"</p>
+                            <h4 class="testimonial-name">- UMMU SALAMAH, MAHASISWA</h4>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -305,7 +330,7 @@
             
             <div class="price-card popular">
     <div class="popular-badge">Paling Populer</div>
-    <h3>Regular Class</h3>
+    <h3>Conversation Class</h3>
     <p>Membangun fondasi bahasa Inggris yang kuat dari dasar dengan metode yang fun dan terstruktur.</p>
     
     <div class="price-option">
@@ -365,8 +390,8 @@
     </div>
 </div>
             <div class="price-card">
-                <h3>Speaking Class</h3>
-                <p>Fokus melatih kelancaran dan kepercayaan diri Anda dalam berbicara secara intensif.</p>
+                <h3>Speaking Partner</h3>
+                <p>Udah paham basic tapi masih kaku pas ngomong? Di sini kamu bisa fokus melatih kelancaran dan PD ngobrol santai bareng tutor.</p>
                 
                 <div class="price-option">
                     <span class="option-name">Reguler</span>
@@ -380,15 +405,23 @@
                 <ul class="features-list">
                     <li>
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-                        <span>Praktik percakapan langsung</span>
+                        <span>3x seminggu, 20 menit per sesi</span>
                     </li>
                     <li>
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-                        <span>Feedback & koreksi langsung</span>
+                        <span>Format free talk santai</span>
                     </li>
                      <li>
                         <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
-                        <span>Kurikulum premium terstruktur</span>
+                        <span>Fleksibel sesuai topik minat</span>
+                    </li>
+                    <li class="feature-highlight">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span><strong>Terstruktur: Topic-based, roleplay, free talk <span style="color: blue;">(Premium)</span></strong></span>
+                    </li>
+                    <li class="feature-highlight">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"></path></svg>
+                        <span><strong>Dapat feedback ringan &amp; vocabulary mingguan <span style="color: blue;">(Premium)</span></strong></span>
                     </li>
                 </ul>
                 <div class="dropdown-container">
@@ -446,6 +479,9 @@
                                 <option value="Speaking Class - Regular">Speaking Class - Regular</option>
                                 <option value="Speaking Class - Premium">Speaking Class - Premium</option>
                             </select>
+                        </div>
+                        <div class="form-group full-width">
+                            <input type="text" id="kode_promo" name="KodePromo" placeholder="Masukkan Kode Promo (Jika Ada)">
                         </div>
                     </div>
                     

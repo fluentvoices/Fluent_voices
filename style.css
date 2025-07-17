@@ -246,6 +246,23 @@ body {
     background-color: #0038c8;
 }
 
+/* --- Styling untuk kotak 'Mengapa Fluent Voices?' --- */
+.why-fluentvoices-box {
+    background-color: #f0f6ff;
+    border: 1px solid #d9e7ff;
+    border-radius: 12px;
+    padding: 2.5rem;
+    margin-top: 2rem;
+}
+
+.why-fluentvoices-title {
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.6rem;
+    margin-bottom: 2rem;
+    color: var(--blue);
+}
+
 /* --- Section Testimoni --- */
 .testimonial-cards {
     display: grid;
@@ -1047,4 +1064,64 @@ body {
 
 .features-list .feature-highlight strong {
     color: var(--blue);
+}
+
+/* --- Hero Countdown (FINAL Eye-Catching & Bright Font) --- */
+@keyframes pulse-glow {
+    0% {
+        box-shadow: 0 0 5px rgba(173, 255, 0, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 18px rgba(173, 255, 0, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 5px rgba(173, 255, 0, 0.4);
+    }
+}
+
+#hero-countdown {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    background-color: var(--blue); /* Latar belakang biru solid agar kontras maksimal */
+    color: var(--white);
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    border-radius: 50px;
+    animation: pulse-glow 3s infinite ease-in-out;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+#hero-countdown p {
+    margin: 0;
+    line-height: 1.5;
+    color: var(--white); /* PENTING: Memaksa warna font menjadi putih agar terlihat jelas */
+}
+
+.badge-promo {
+    background-color: var(--green);
+    color: #0029a3; /* Teks biru tua untuk kontras terbaik di atas hijau */
+    padding: 0.25rem 0.6rem;
+    border-radius: 5px;
+    font-weight: 700;
+    font-size: 0.8rem;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+}
+
+#countdown-timer span {
+    font-weight: 700;
+    color: var(--green); /* Warna hijau cerah untuk angka countdown */
+}
+
+#promo-expired-text {
+    font-weight: 700;
+    color: #ffc2c2;
+}
+
+@media (max-width: 768px) {
+    #hero-countdown {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+        animation: none;
+    }
 }
