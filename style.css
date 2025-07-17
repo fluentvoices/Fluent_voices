@@ -1125,6 +1125,7 @@ body {
 .countdown-text {
     vertical-align: middle;
     margin-right: 0.5rem;
+    font-size: 1 rem; /* FONT DIKECILKAN */
 }
 
 #countdown-timer {
@@ -1159,6 +1160,7 @@ body {
         display: block;
         margin-right: 0;
         margin-bottom: 0.5rem;
+        font-size: 0.8rem; /* FONT DIKECILKAN UNTUK MOBILE */
     }
 
     #countdown-timer {
