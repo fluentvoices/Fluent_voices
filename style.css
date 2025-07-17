@@ -149,7 +149,7 @@ body {
 .hero-content .cta-button {
     /* Animasi */
     opacity: 0;
-    animation: fadeInUp 0.8s 0.4s ease-out forwards;
+    animation: fadeInUp 0.8s 0.4s ease-out forwards, cta-pulse-glow 2.5s infinite ease-in-out;
 }
 
 .content-section {
@@ -237,8 +237,9 @@ body {
     transition: transform 0.3s ease, background-color 0.3s ease;
     background-color: var(--blue);
     color: var(--white);
-    border: none;
+    border: 2px solid #0038c8;
     cursor: pointer;
+    /* Animasi glow telah dipindahkan ke .hero-content .cta-button untuk spesifisitas */
 }
 
 .cta-button:hover {
@@ -1066,7 +1067,7 @@ body {
     color: var(--blue);
 }
 
-/* --- Hero Countdown (FINAL Eye-Catching & Bright Font) --- */
+/* --- Hero Countdown (FINAL & Mobile-Friendly) --- */
 @keyframes pulse-glow {
     0% {
         box-shadow: 0 0 5px rgba(173, 255, 0, 0.4);
@@ -1079,10 +1080,23 @@ body {
     }
 }
 
+/* PERUBAHAN: Animasi baru untuk tombol CTA */
+@keyframes cta-pulse-glow {
+    0% {
+        box-shadow: 0 0 8px rgba(0, 68, 241, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 68, 241, 0.9);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(0, 68, 241, 0.6);
+    }
+}
+
 #hero-countdown {
     margin-bottom: 1.5rem;
     font-size: 1.1rem;
-    background-color: var(--blue); /* Latar belakang biru solid agar kontras maksimal */
+    background-color: var(--blue);
     color: var(--white);
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -1094,12 +1108,12 @@ body {
 #hero-countdown p {
     margin: 0;
     line-height: 1.5;
-    color: var(--white); /* PENTING: Memaksa warna font menjadi putih agar terlihat jelas */
+    color: var(--white); 
 }
 
 .badge-promo {
     background-color: var(--green);
-    color: #0029a3; /* Teks biru tua untuk kontras terbaik di atas hijau */
+    color: #0029a3; 
     padding: 0.25rem 0.6rem;
     border-radius: 5px;
     font-weight: 700;
@@ -1108,9 +1122,15 @@ body {
     vertical-align: middle;
 }
 
-#countdown-timer span {
+.countdown-text {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+#countdown-timer {
     font-weight: 700;
-    color: var(--green); /* Warna hijau cerah untuk angka countdown */
+    color: var(--green);
+    vertical-align: middle;
 }
 
 #promo-expired-text {
@@ -1118,10 +1138,31 @@ body {
     color: #ffc2c2;
 }
 
+/* === PERUBAHAN UTAMA UNTUK MOBILE === */
 @media (max-width: 768px) {
     #hero-countdown {
-        padding: 0.5rem 1rem;
+        padding: 0.75rem;
         font-size: 0.9rem;
-        animation: none;
+        /* Hapus 'animation: none;' untuk mengaktifkan kembali efek glow */
+        border-radius: 12px;      /* 1. Bentuk tidak lagi lonjong */
+        margin-bottom: 2.5rem;    /* 2. Posisikan lebih ke atas */
+        border: 2px solid var(--green); /* 3. Tambahkan border hijau cerah */
+    }
+
+    .badge-promo {
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+    }
+
+    .countdown-text {
+        display: block;
+        margin-right: 0;
+        margin-bottom: 0.5rem;
+    }
+
+    #countdown-timer {
+        display: block;
+        font-size: 1.5rem;
     }
 }
