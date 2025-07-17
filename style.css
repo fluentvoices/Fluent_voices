@@ -1212,4 +1212,5 @@ body {
 /* FIX: Mengatasi dropdown yang terpotong pada kartu populer */
 .price-card.dropdown-active {
     overflow: visible;
+    z-index: 20; /* Pastikan kartu aktif ada di lapisan paling atas */
 }
