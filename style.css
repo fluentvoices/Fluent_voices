@@ -831,7 +831,7 @@ body {
     line-height: 1.8;
 }
 
-/* --- BAGIAN HARGA --- */
+/* --- BAGIAN HARGA (KODE FINAL) --- */
 .pricing-cards {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -850,7 +850,6 @@ body {
     text-align: left;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     position: relative; 
-    /* overflow: hidden; -> BARIS INI DIHAPUS */
 }
 
 .price-card:hover {
@@ -871,10 +870,35 @@ body {
     min-height: 50px; 
 }
 
+/* PERBAIKAN #1: Memberi ruang ekstra di kartu populer agar judul tidak menabrak badge */
+.price-card.popular {
+    border-color: var(--blue);
+    border-width: 2px;
+    overflow: hidden;
+    padding-top: 3.5rem; /* Padding atas dibuat lebih besar dari kartu biasa */
+}
+
+.popular-badge {
+    position: absolute;
+    width: 200px; 
+    padding: 8px 0; 
+    background-color: var(--blue);
+    color: var(--white);
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    box-shadow: 0 4px 10px rgba(0, 68, 241, 0.2);
+    top: 30px;
+    right: -60px;
+    transform: rotate(45deg);
+}
+
+/* PERBAIKAN #2 & #3: Membuat alignment nama paket dan harga menjadi simetris */
 .price-option {
     display: flex;
-    justify-content: space-between;
-    align-items: baseline;
+    justify-content: space-between; /* Mendorong item ke sisi berlawanan */
+    align-items: center;            /* Menyelaraskan item di tengah secara vertikal */
     padding: 1.25rem 0;
     border-bottom: 1px solid #f0f2f5;
 }
@@ -892,6 +916,7 @@ body {
     font-weight: 700;
     font-size: 1.75rem;
     color: var(--dark-text);
+    text-align: right; /* Memastikan harga selalu rata kanan */
 }
 
 .option-price small {
@@ -928,35 +953,6 @@ body {
     text-align: center;
     width: 100%;
 }
-
-.price-card.popular {
-    border-color: var(--blue);
-    border-width: 2px;
-    overflow: hidden; /* PINDAHKAN OVERFLOW KE SINI, HANYA UNTUK KARTU POPULER */
-}
-
-/* CLASS BARU UNTUK SOLUSI FINAL */
-.price-card.dropdown-active {
-    overflow: visible; /* Izinkan dropdown terlihat di luar batas kartu */
-    z-index: 20;       /* Angkat kartu ke lapisan paling atas */
-}
-
-.popular-badge {
-    position: absolute;
-    width: 200px; 
-    padding: 8px 0; 
-    background-color: var(--blue);
-    color: var(--white);
-    text-align: center;
-    font-size: 0.85rem;
-    font-weight: 700;
-    letter-spacing: 0.5px;
-    box-shadow: 0 4px 10px rgba(0, 68, 241, 0.2);
-    top: 30px;
-    right: -60px;
-    transform: rotate(45deg);
-}
-
 
 /* --- Media Query untuk Responsivitas --- */
 @media (max-width: 992px) {
