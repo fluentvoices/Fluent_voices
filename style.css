@@ -917,9 +917,10 @@ body {
 
 .option-price {
     font-weight: 700;
-    font-size: 1.3rem; /* Ukuran diperkecil lagi */
+    font-size: 1.3rem;
     color: var(--dark-text);
     text-align: right;
+    white-space: nowrap; /* Tambahkan baris ini */
 }
 
 .option-price small {
