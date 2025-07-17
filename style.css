@@ -914,13 +914,13 @@ body {
 
 .option-price {
     font-weight: 700;
-    font-size: 1.5rem; /* Ukuran harga utama dikecilkan */
+    font-size: 1.3rem; /* Ukuran diperkecil lagi */
     color: var(--dark-text);
-    text-align: right; /* Memastikan harga selalu rata kanan */
+    text-align: right;
 }
 
 .option-price small {
-    font-size: 0.85rem; /* Ukuran teks "/bulan" juga disesuaikan */
+    font-size: 0.8rem; /* Ukuran teks kecil juga disesuaikan */
     font-weight: 400;
     color: #666;
     margin-left: 0.25rem;
