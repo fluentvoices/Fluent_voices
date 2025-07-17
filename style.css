@@ -917,14 +917,14 @@ body {
 
 .option-price {
     font-weight: 700;
-    font-size: 1.3rem;
+    font-size: 1.2rem; /* Ukuran final, lebih kecil */
     color: var(--dark-text);
     text-align: right;
-    white-space: nowrap; /* Tambahkan baris ini */
+    white-space: nowrap; 
 }
 
 .option-price small {
-    font-size: 0.8rem; /* Ukuran teks kecil juga disesuaikan */
+    font-size: 0.75rem; /* Ukuran teks '/bulan' juga diperkecil */
     font-weight: 400;
     color: #666;
     margin-left: 0.25rem;
