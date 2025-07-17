@@ -994,6 +994,24 @@ body {
     .about-details h3 {
         font-size: 1.5rem;
     }
+
+    /* === PERBAIKAN TAMPILAN HARGA DI MOBILE === */
+    .pricing-cards {
+        grid-template-columns: 1fr; /* Paksa 1 kolom */
+    }
+    .price-card {
+        padding: 2rem 1.5rem; /* Kurangi padding horizontal */
+    }
+    .price-card h3 {
+        font-size: 1.6rem; /* Kecilkan sedikit judul */
+    }
+    .popular-badge {
+        width: 160px;
+        font-size: 0.8rem;
+        top: 18px;
+        right: -45px; /* Sesuaikan posisi agar tidak terlalu keluar */
+    }
+    /* === AKHIR PERBAIKAN === */
 }
 
 /* --- GAYA UNTUK DROPDOWN DI BAGIAN HARGA --- */
@@ -1125,7 +1143,7 @@ body {
 .countdown-text {
     vertical-align: middle;
     margin-right: 0.5rem;
-    font-size: 1 rem; /* FONT DIKECILKAN */
+    font-size: 1.05rem; 
 }
 
 #countdown-timer {
@@ -1160,7 +1178,7 @@ body {
         display: block;
         margin-right: 0;
         margin-bottom: 0.5rem;
-        font-size: 0.8rem; /* FONT DIKECILKAN UNTUK MOBILE */
+        font-size: 1rem; 
     }
 
     #countdown-timer {
