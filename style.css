@@ -1168,3 +1168,43 @@ body {
         font-size: 1.5rem;
     }
 }
+
+/* --- Penyesuaian Tampilan Harga di Mobile --- */
+@media (max-width: 768px) {
+    /* Mengurangi jarak vertikal antar kartu di tampilan mobile */
+    .pricing-cards {
+        gap: 2rem;
+    }
+
+    /* Menyesuaikan padding di dalam kartu agar tidak terlalu sempit */
+    .price-card {
+        padding: 2rem 1.5rem;
+    }
+
+    /* Menyesuaikan ukuran font judul dan harga agar tidak terlalu besar */
+    .price-card h3 {
+        font-size: 1.5rem;
+    }
+
+    .option-price {
+        font-size: 1.5rem;
+    }
+    
+    .option-name {
+        font-size: 1rem;
+    }
+    
+    /* Mengatur ulang posisi badge 'Populer' agar pas di layar mobile */
+    .popular-badge {
+        width: 160px;
+        font-size: 0.8rem;
+        top: 22px;
+        right: -45px;
+    }
+    
+    /* Memastikan teks fitur lebih mudah dibaca */
+    .features-list li {
+        gap: 0.5rem; /* Mengurangi jarak antara ikon dan teks */
+        font-size: 0.95rem;
+    }
+}
