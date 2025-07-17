@@ -1208,3 +1208,8 @@ body {
         font-size: 0.95rem;
     }
 }
+
+/* FIX: Mengatasi dropdown yang terpotong pada kartu populer */
+.price-card.dropdown-active {
+    overflow: visible;
+}
