@@ -52,60 +52,9 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
 
-    // --- Bagian Pengiriman Formulir ---
-    const registrationForm = document.getElementById('main-form');
-    const formStatus = document.getElementById('form-status');
+    // --- Bagian Pengiriman Formulir (DIHAPUS) ---
+    // Tidak diperlukan lagi karena Netlify akan menanganinya secara otomatis.
 
-    if (registrationForm) {
-        registrationForm.addEventListener('submit', function(event) {
-            event.preventDefault();
-            const submitButton = registrationForm.querySelector('button[type="submit"]');
-            
-            // Validasi Kode Promo sebelum mengirim
-            const promoCodeInput = document.getElementById('kode_promo');
-            const nowForValidation = new Date();
-
-            // Cek jika kode promo yang dimasukkan adalah kode promo diskon DAN sudah lewat tanggalnya
-            if (promoCodeInput && promoCodeInput.value.toUpperCase() === 'ENGLISHYESMAGERNO' && nowForValidation > countdownEndDate) {
-                formStatus.textContent = 'Maaf, kode promo "ENGLISHYESMAGERNO" sudah tidak berlaku.';
-                formStatus.style.color = 'red';
-                return; // Batalkan pengiriman formulir
-            }
-
-            // Lanjutkan proses pengiriman jika validasi lolos
-            submitButton.disabled = true;
-            submitButton.textContent = 'Mengirim...';
-            formStatus.textContent = '';
-            formStatus.style.color = '#333';
-
-            const formData = new FormData(registrationForm);
-            const data = Object.fromEntries(formData.entries());
-
-            fetch('https://backend-fluentvoices.onrender.com/daftar', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data),
-            })
-            .then(response => response.json())
-            .then(result => {
-                console.log('Sukses:', result);
-                formStatus.textContent = result.message;
-                formStatus.style.color = 'green';
-                registrationForm.reset();
-            })
-            .catch(error => {
-                console.error('Error:', error);
-                formStatus.textContent = 'Terjadi kesalahan saat mengirim. Silakan coba lagi.';
-                formStatus.style.color = 'red';
-            })
-            .finally(() => {
-                submitButton.disabled = false;
-                submitButton.textContent = 'Kirim Pendaftaran';
-            });
-        });
-    }
 
     // --- LOGIKA DROPDOWN HARGA (SOLUSI FINAL OVERFLOW & Z-INDEX) ---
     const dropdownContainers = document.querySelectorAll('.dropdown-container');
