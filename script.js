@@ -18,12 +18,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- Bagian Countdown Timer (Versi Revisi) ---
-    // Atur tanggal akhir promo (Tengah malam tanggal 20 Juli, masuk ke 21 Juli)
+    // --- Bagian Countdown Timer & Promo ---
+    
+    const KODE_PROMO_AKTIF = 'GASKENFLUENT';
     const countdownEndDate = new Date("2025-07-21T00:00:00").getTime();
 
-    const timerSpan = document.getElementById("countdown-timer");
-    const expiredTextSpan = document.getElementById("promo-expired-text");
     const countdownContainer = document.getElementById("hero-countdown");
 
     if (countdownContainer) {
@@ -32,31 +31,51 @@ document.addEventListener('DOMContentLoaded', function() {
             const distance = countdownEndDate - now;
 
             if (distance > 0) {
+                // **** PERUBAHAN DI SINI ****
+                // Tampilkan kontainer karena promo masih aktif
+                countdownContainer.style.display = 'inline-block';
+
                 const days = Math.floor(distance / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
                 const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-                // Update elemen-elemen di dalam timer
                 document.getElementById("days").innerText = days.toString().padStart(2, '0');
                 document.getElementById("hours").innerText = hours.toString().padStart(2, '0');
                 document.getElementById("minutes").innerText = minutes.toString().padStart(2, '0');
                 document.getElementById("seconds").innerText = seconds.toString().padStart(2, '0');
             } else {
-                // Jika waktu habis
+                // Jika waktu habis, cukup hentikan interval. Elemen sudah tersembunyi.
                 clearInterval(countdownInterval);
-                if (timerSpan) timerSpan.style.display = 'none';
-                if (expiredTextSpan) expiredTextSpan.style.display = 'inline';
             }
         }, 1000);
     }
+    
+    // LOGIKA VALIDASI PROMO
+    const registrationForm = document.getElementById('main-form');
+    const formStatus = document.getElementById('form-status');
+    const promoCodeInput = document.getElementById('kode_promo');
 
+    if (registrationForm) {
+        registrationForm.addEventListener('submit', function(event) {
+            const kodeYangDimasukkan = promoCodeInput.value.toUpperCase();
+            const waktuSekarang = new Date().getTime();
 
-    // --- Bagian Pengiriman Formulir (DIHAPUS) ---
-    // Tidak diperlukan lagi karena Netlify akan menanganinya secara otomatis.
+            if (kodeYangDimasukkan === KODE_PROMO_AKTIF && waktuSekarang > countdownEndDate) {
+                event.preventDefault(); 
+                if (formStatus) {
+                    formStatus.textContent = `Maaf, kode promo "${KODE_PROMO_AKTIF}" sudah tidak berlaku.`;
+                    formStatus.style.color = 'red';
+                }
+            } else {
+                if (formStatus) {
+                    formStatus.textContent = '';
+                }
+            }
+        });
+    }
 
-
-    // --- LOGIKA DROPDOWN HARGA (SOLUSI FINAL OVERFLOW & Z-INDEX) ---
+    // --- LOGIKA DROPDOWN HARGA ---
     const dropdownContainers = document.querySelectorAll('.dropdown-container');
     const formPackageSelect = document.getElementById('paket');
 
@@ -66,25 +85,21 @@ document.addEventListener('DOMContentLoaded', function() {
         const dropdownItems = container.querySelectorAll('.dropdown-item');
         const priceCard = container.closest('.price-card'); 
 
-        // Saat tombol "Pilih Paket" diklik
         toggleButton.addEventListener('click', (e) => {
             e.stopPropagation(); 
             const isAlreadyActive = dropdownMenu.classList.contains('show');
 
-            // 1. Tutup semua dropdown lain dan hapus class 'dropdown-active'
             document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
                 openMenu.classList.remove('show');
                 openMenu.closest('.price-card').classList.remove('dropdown-active');
             });
             
-            // 2. Jika menu yang diklik tadi belum aktif, tampilkan dan aktifkan kartunya
             if (!isAlreadyActive) {
                 dropdownMenu.classList.add('show');
-                priceCard.classList.add('dropdown-active'); // Terapkan class final
+                priceCard.classList.add('dropdown-active');
             }
         });
 
-        // Saat salah satu item paket diklik
         dropdownItems.forEach(item => {
             item.addEventListener('click', () => {
                 const selectedValue = item.getAttribute('data-value');
@@ -92,12 +107,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     formPackageSelect.value = selectedValue;
                 }
                 dropdownMenu.classList.remove('show');
-                priceCard.classList.remove('dropdown-active'); // Nonaktifkan kembali kartu
+                priceCard.classList.remove('dropdown-active');
             });
         });
     });
 
-    // Menutup dropdown jika klik di luar area menu
     window.addEventListener('click', () => {
         document.querySelectorAll('.dropdown-menu.show').forEach(openMenu => {
             openMenu.classList.remove('show');
