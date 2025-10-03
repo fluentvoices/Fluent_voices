@@ -1,4 +1,4 @@
-# Aturan redirect Anda yang lain
+# Redirect lama Anda
 /logbook   https://drive.google.com/drive/u/3/folders/1MeOT-O2mO626_DOZgDdM0zg1ULljIUsm   301
 /lembarevaluasitutor   https://docs.google.com/forms/d/e/1FAIpQLSdwPuDDiAfHYjqKhzr5zamDxnjLGqHAV3z_r9lkvoBexTjzAw/viewform?usp=header   301
 /exploredreadingtest   https://docs.google.com/forms/d/e/1FAIpQLSc_TDUyfpuKzc1lOmUBRy292oCewQPDOMRpGMA6fQUQcz-yww/viewform?usp=header   301
@@ -6,5 +6,13 @@
 /reportcardaugust   https://docs.google.com/forms/d/e/1FAIpQLSeJ401oup7bgpLeKG5HBVHpiyzIuQukY5CvUf2wJkEnIonkEA/viewform?usp=dialog   301
 /reportcardseptember   https://docs.google.com/forms/d/e/1FAIpQLSeJ401oup7bgpLeKG5HBVHpiyzIuQukY5CvUf2wJkEnIonkEA/viewform?usp=dialog   301
 
-# ATURAN FINAL UNTUK HALAMAN PREMIUM (INI YANG PALING PENTING)
-/materi-premium   /materi-premium.html   200!   Role=premium
+# === ATURAN FINAL YANG PALING TEGAS ===
+
+# 1. Jaga akses langsung ke file .html
+#    Jika pengguna TIDAK punya peran premium, paksa lempar ke halaman utama.
+/materi-premium.html   /   302!   Role=!premium
+
+# 2. Jaga akses ke URL cantik (/materi-premium)
+#    Aturan ini akan menangani pengguna yang sudah login untuk melihat konten
+#    dan juga melempar yang belum login (karena aturan di atas).
+/materi-premium   /materi-premium.html   200!
