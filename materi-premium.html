@@ -9,8 +9,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@24..48,200..800&display=swap" rel="stylesheet">
     
     <style>
-        /* === DESAIN & ANIMASI BARU === */
-
         :root {
             --blue: #0044f1;
             --light-bg: #f8f9fa;
@@ -90,7 +88,7 @@
             font-weight: 600;
         }
         
-        /* Desain Baru Tombol Judul Video */
+        /* Desain Tombol Judul Video */
         .video-title-link {
             display: flex;
             align-items: center;
@@ -113,12 +111,12 @@
             box-shadow: 0 4px 12px rgba(0,0,0,0.1);
             color: var(--blue);
         }
-        .video-title-link.active { /* Gaya untuk judul yang sedang aktif */
+        .video-title-link.active {
             background-color: #f0f6ff;
             border-color: var(--blue);
             color: var(--blue);
         }
-        .video-title-link .play-icon { /* Gaya untuk ikon play */
+        .video-title-link .play-icon {
             width: 20px;
             height: 20px;
             flex-shrink: 0;
@@ -138,12 +136,11 @@
             max-width: 100%; 
             background: #000; 
             border-radius: 12px; 
-            /* Properti untuk animasi */
             opacity: 0;
             transform: translateY(10px);
             transition: opacity 0.5s ease, transform 0.5s ease;
         }
-        .video-container.visible { /* Kelas untuk memicu animasi */
+        .video-container.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -199,7 +196,15 @@
     </div>
 
     <script>
-        // Logika untuk Login
+        // Cek status login saat halaman pertama kali dimuat
+        document.addEventListener('DOMContentLoaded', function() {
+            if (sessionStorage.getItem('isLoggedIn') === 'true') {
+                document.getElementById('loginSection').style.display = 'none';
+                document.getElementById('materiSection').style.display = 'block';
+            }
+        });
+
+        // Logika untuk form Login saat tombol diklik
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const usernameRahasia = 'fluentuser';
@@ -208,6 +213,7 @@
             const passwordInput = document.getElementById('password').value;
             
             if (usernameInput === usernameRahasia && passwordInput === passwordRahasia) {
+                sessionStorage.setItem('isLoggedIn', 'true');
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('materiSection').style.display = 'block';
             } else {
@@ -222,34 +228,33 @@
         videoLinks.forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
-
                 const wasActive = this.classList.contains('active');
-
-                // Hapus status aktif dari semua link dan kosongkan placeholder
                 videoLinks.forEach(l => l.classList.remove('active'));
                 videoPlaceholders.forEach(p => p.innerHTML = '');
-
-                // Jika link yang diklik sebelumnya tidak aktif, maka aktifkan dan tampilkan video
                 if (!wasActive) {
-                    this.classList.add('active'); // Tandai link ini sebagai aktif
+                    this.classList.add('active');
                     const videoSrc = this.getAttribute('data-video-src');
                     const targetPlaceholder = this.nextElementSibling;
-
                     if (videoSrc) {
-                        const iframeHTML = `<div class="video-container" id="current-video">${/* Iframe content */}</div>`;
-                        targetPlaceholder.innerHTML = iframeHTML.replace('{/* Iframe content */}', `
-                            <iframe 
-                                src="${videoSrc}?autoplay=1" 
-                                title="YouTube video player" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>`);
+                        const finalHTML = `
+                            <div class="video-container" id="current-video">
+                                <iframe 
+                                    src="${videoSrc}?autoplay=1" 
+                                    title="YouTube video player" 
+                                    frameborder="0" 
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                    referrerpolicy="strict-origin-when-cross-origin" 
+                                    allowfullscreen>
+                                </iframe>
+                            </div>
+                        `;
+                        targetPlaceholder.innerHTML = finalHTML;
                         
-                        // Beri jeda sesaat agar transisi CSS bisa berjalan
                         setTimeout(() => {
-                            document.getElementById('current-video').classList.add('visible');
+                            const currentVideo = document.getElementById('current-video');
+                            if (currentVideo) {
+                                currentVideo.classList.add('visible');
+                            }
                         }, 10);
                     }
                 }
