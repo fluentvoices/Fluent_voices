@@ -11,94 +11,15 @@
     <style>
         :root {
             --blue: #0044f1;
-            --light-bg: #f8f9fa;
             --dark-text: #1a1a1a;
         }
-
         body { 
             font-family: 'Bricolage Grotesque', sans-serif; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            min-height: 100vh; 
             background-color: #f0f2f5; 
             margin: 0; 
-            padding: 1rem;
+            padding: 2rem;
         }
-        
-        /* Animasi Masuk untuk Kotak Login */
-        .login-container { 
-            display: block; 
-            background-color: white; 
-            padding: 40px; 
-            border-radius: 12px; 
-            box-shadow: 0 8px 30px rgba(0,0,0,0.1); 
-            text-align: center; 
-            max-width: 400px; 
-            width: 100%;
-            /* Properti Awal Animasi */
-            opacity: 0;
-            transform: scale(0.95);
-            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-        }
-        .login-container.visible { /* Kelas untuk memicu animasi */
-            opacity: 1;
-            transform: scale(1);
-        }
-
-        .login-container h2 { 
-            margin-top: 0; 
-            color: var(--dark-text); 
-            font-weight: 600;
-        }
-        .login-container p { color: #666; }
-        .login-container input { 
-            width: 100%; 
-            padding: 12px; 
-            margin-top: 15px; 
-            border: 1px solid #ddd; 
-            border-radius: 8px; 
-            box-sizing: border-box; 
-            font-family: 'Bricolage Grotesque', sans-serif;
-            font-size: 1rem;
-        }
-        .login-container button { 
-            width: 100%; 
-            padding: 12px; 
-            margin-top: 15px; 
-            background-color: var(--blue); 
-            color: white; 
-            border: none; 
-            border-radius: 8px; 
-            cursor: pointer; 
-            font-size: 16px;
-            font-weight: 600;
-            transition: transform 0.2s ease;
-        }
-        .login-container button:hover { transform: scale(1.02); }
-        .login-container .error { color: red; margin-top: 10px; font-size: 14px; visibility: hidden; }
-
-        /* CSS untuk Ikon Mata */
-        .password-wrapper {
-            position: relative;
-            width: 100%;
-        }
-        .password-wrapper input {
-            padding-right: 45px;
-        }
-        .toggle-icon {
-            position: absolute;
-            top: 50%;
-            right: 15px;
-            transform: translateY(-50%);
-            cursor: pointer;
-            width: 20px;
-            height: 20px;
-        }
-        
-        /* Konten Materi */
         .materi-container { 
-            display: none; 
             max-width: 800px; 
             margin: 0 auto; 
             padding: 2rem; 
@@ -106,6 +27,11 @@
             background-color: white; 
             border-radius: 12px; 
             box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
+        /* Tambahkan tombol Logout di sini jika perlu */
+        .logout-section {
+            text-align: right;
+            margin-bottom: 1rem;
         }
         .modul { margin-bottom: 2.5rem; }
         .modul h3 { 
@@ -116,86 +42,22 @@
             color: var(--blue);
             font-weight: 600;
         }
-        
-        /* Desain Tombol Judul Video */
-        .video-title-link {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            text-decoration: none;
-            color: var(--dark-text);
-            font-size: 1.1rem;
-            font-weight: 600;
-            padding: 15px;
-            background-color: white;
-            border: 1px solid #e0e0e0;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            transition: all 0.2s ease-in-out;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .video-title-link:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            color: var(--blue);
-        }
-        .video-title-link.active {
-            background-color: #f0f6ff;
-            border-color: var(--blue);
-            color: var(--blue);
-        }
-        .video-title-link .play-icon {
-            width: 20px;
-            height: 20px;
-            flex-shrink: 0;
-            fill: #aaa;
-            transition: fill 0.2s ease-in-out;
-        }
-        .video-title-link:hover .play-icon, .video-title-link.active .play-icon {
-            fill: var(--blue);
-        }
-
+        .video-title-link { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--dark-text); font-size: 1.1rem; font-weight: 600; padding: 15px; background-color: white; border: 1px solid #e0e0e0; border-radius: 8px; margin-bottom: 8px; transition: all 0.2s ease-in-out; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
+        .video-title-link:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); color: var(--blue); }
+        .video-title-link.active { background-color: #f0f6ff; border-color: var(--blue); color: var(--blue); }
+        .video-title-link .play-icon { width: 20px; height: 20px; flex-shrink: 0; fill: #aaa; transition: fill 0.2s ease-in-out; }
+        .video-title-link:hover .play-icon, .video-title-link.active .play-icon { fill: var(--blue); }
         .video-placeholder { margin-bottom: 1.5rem; }
-        .video-container { 
-            position: relative; 
-            padding-bottom: 56.25%; 
-            height: 0; 
-            overflow: hidden; 
-            max-width: 100%; 
-            background: #000; 
-            border-radius: 12px; 
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-        .video-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 12px; opacity: 0; transform: translateY(10px); transition: opacity 0.5s ease, transform 0.5s ease; }
+        .video-container.visible { opacity: 1; transform: translateY(0); }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
 </head>
 <body>
 
-    <div id="loginSection" class="login-container">
-        <h2>Akses Materi Premium</h2>
-        <p>Silakan login untuk melanjutkan.</p>
-        <form id="loginForm">
-            <input type="text" id="username" placeholder="Username" required>
-            <div class="password-wrapper">
-                <input type="password" id="password" placeholder="Password" required>
-                <span id="togglePassword" class="toggle-icon">
-                    <svg id="eye-open" fill="#888" viewBox="0 0 24 24"><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" /></svg>
-                    <svg id="eye-closed" fill="#888" style="display: none;" viewBox="0 0 24 24"><path d="M12,7A5,5 0 0,1 17,12C17,12.23 16.98,12.45 16.93,12.68L19.71,15.46C21.39,14.07 22.85,12.16 23,12C21.27,7.61 17,4.5 12,4.5C10.5,4.5 9.09,4.89 7.82,5.56L9.33,7.07C9.8,6.72 10.37,6.5 11,6.5C11.33,6.5 11.66,6.56 12,6.68L12.72,7.4C12.45,7.18 12.23,7.09 12,7M2.39,4.27L1.11,5.54L4.29,8.71C2.84,9.88 1.6,11.5 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15,19.14 16.33,18.45L19.46,21.58L20.73,20.31L2.39,4.27M12,17A5,5 0 0,1 7,12C7,11.16 7.24,10.38 7.64,9.7L14.3,16.36C13.62,16.76 12.84,17 12,17Z" /></svg>
-                </span>
-            </div>
-            <button type="submit">Masuk</button>
-        </form>
-        <p id="errorMessage" class="error">Username atau Password salah.</p>
-    </div>
+    <div class="materi-container">
+        <div data-netlify-identity-button class="logout-section"></div>
 
-    <div id="materiSection" class="materi-container">
         <h2 style="text-align: center;">Materi Pembelajaran</h2>
         <p style="text-align: center;">Selamat datang! Silakan klik judul di bawah untuk memulai video.</p>
         
@@ -206,82 +68,18 @@
                 <span>1.1 - Welcome & Introduction</span>
             </a>
             <div class="video-placeholder"></div>
-
             <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
                 <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
                 <span>1.2 - Course Objectives</span>
             </a>
             <div class="video-placeholder"></div>
         </div>
-
-        <div class="modul">
-            <h3>Modul 2: Basic Conversation</h3>
-            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
-                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
-                <span>2.1 - Greetings and Farewells</span>
-            </a>
-            <div class="video-placeholder"></div>
-
-            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
-                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
-                <span>2.2 - Asking "How are you?"</span>
-            </a>
-            <div class="video-placeholder"></div>
-        </div>
     </div>
 
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const loginTimestamp = localStorage.getItem('loginTimestamp');
-            const loginSection = document.getElementById('loginSection');
-            const materiSection = document.getElementById('materiSection');
-            if (loginTimestamp) {
-                const now = new Date().getTime();
-                const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
-                if (now - loginTimestamp < oneMonthInMs) {
-                    loginSection.style.display = 'none';
-                    materiSection.style.display = 'block';
-                } else {
-                    localStorage.removeItem('loginTimestamp');
-                    loginSection.classList.add('visible');
-                }
-            } else {
-                loginSection.classList.add('visible');
-            }
-        });
-
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const usernameRahasia = 'fluentuser';
-            const passwordRahasia = 'Fluent123';
-            const usernameInput = document.getElementById('username').value;
-            const passwordInput = document.getElementById('password').value;
-            
-            if (usernameInput === usernameRahasia && passwordInput === passwordRahasia) {
-                localStorage.setItem('loginTimestamp', new Date().getTime());
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('materiSection').style.display = 'block';
-            } else {
-                document.getElementById('errorMessage').style.visibility = 'visible';
-            }
-        });
-
-        const togglePassword = document.getElementById('togglePassword');
-        const passwordInput = document.getElementById('password');
-        const eyeOpen = document.getElementById('eye-open');
-        const eyeClosed = document.getElementById('eye-closed');
-        togglePassword.addEventListener('click', function() {
-            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
-            passwordInput.setAttribute('type', type);
-            if (type === 'password') {
-                eyeOpen.style.display = 'block';
-                eyeClosed.style.display = 'none';
-            } else {
-                eyeOpen.style.display = 'none';
-                eyeClosed.style.display = 'block';
-            }
-        });
-
+        // JavaScript untuk Membuat Video Saat Diklik (tidak berubah)
         const videoLinks = document.querySelectorAll('.video-title-link');
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
         videoLinks.forEach(link => {
@@ -295,30 +93,16 @@
                     const videoSrc = this.getAttribute('data-video-src');
                     const targetPlaceholder = this.nextElementSibling;
                     if (videoSrc) {
-                        const finalHTML = `
-                            <div class="video-container" id="current-video">
-                                <iframe 
-                                    src="${videoSrc}?autoplay=1" 
-                                    title="YouTube video player" 
-                                    frameborder="0" 
-                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                    referrerpolicy="strict-origin-when-cross-origin" 
-                                    allowfullscreen>
-                                </iframe>
-                            </div>
-                        `;
+                        const finalHTML = `<div class="video-container" id="current-video"><iframe src="${videoSrc}?autoplay=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>`;
                         targetPlaceholder.innerHTML = finalHTML;
                         setTimeout(() => {
                             const currentVideo = document.getElementById('current-video');
-                            if (currentVideo) {
-                                currentVideo.classList.add('visible');
-                            }
+                            if (currentVideo) { currentVideo.classList.add('visible'); }
                         }, 10);
                     }
                 }
             });
         });
     </script>
-
 </body>
 </html>
