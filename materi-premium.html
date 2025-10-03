@@ -8,9 +8,19 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@24..48,200..800&display=swap" rel="stylesheet">
     
+    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+
     <style>
         :root { --blue: #0044f1; --dark-text: #1a1a1a; }
         body { font-family: 'Bricolage Grotesque', sans-serif; background-color: #f0f2f5; margin: 0; padding: 2rem; }
+        
+        #access-gate {
+            text-align: center;
+            padding: 50px;
+            font-size: 1.2rem;
+            color: #555;
+        }
+
         .materi-container { max-width: 800px; margin: 0 auto; padding: 2rem; text-align: left; background-color: white; border-radius: 12px; box-shadow: 0 8px 30px rgba(0,0,0,0.1); }
         .logout-section { text-align: right; margin-bottom: 1rem; }
         .modul { margin-bottom: 2.5rem; }
@@ -28,12 +38,14 @@
 </head>
 <body>
 
-    <div class="materi-container">
-        <div data-netlify-identity-button class="logout-section"></div>
+    <div id="access-gate">
+        <p>Memeriksa status login Anda...</p>
+    </div>
 
+    <div id="materiSection" class="materi-container" style="display: none;">
+        <div data-netlify-identity-button class="logout-section"></div>
         <h2 style="text-align: center;">Materi Pembelajaran</h2>
         <p style="text-align: center;">Selamat datang! Silakan klik judul di bawah untuk memulai video.</p>
-        
         <div class="modul">
             <h3>Modul 1: Getting Started</h3>
             <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
@@ -44,11 +56,38 @@
         </div>
     </div>
 
-    <script type="text/javascript" src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
-
     <script>
+        // --- SCRIPT "KUNCI ELEKTRONIK" (Gatekeeper) ---
+        document.addEventListener('DOMContentLoaded', () => {
+            const materiSection = document.getElementById('materiSection');
+            const accessGate = document.getElementById('access-gate');
+
+            const handleAccess = (user) => {
+                const isPremium = user?.app_metadata?.roles?.includes('premium');
+
+                if (isPremium) {
+                    materiSection.style.display = 'block';
+                    accessGate.style.display = 'none';
+                } else {
+                    materiSection.style.display = 'none';
+                    accessGate.innerHTML = '<p>Akses ditolak. Silakan login dengan akun premium Anda.</p>';
+                    accessGate.style.display = 'block';
+                    netlifyIdentity.open('login');
+                }
+            };
+
+            // Jalankan pengecekan saat halaman dimuat
+            handleAccess(netlifyIdentity.currentUser());
+
+            // Tambahkan listener untuk event login dan logout
+            netlifyIdentity.on('login', handleAccess);
+            netlifyIdentity.on('logout', () => handleAccess(null));
+        });
+
+        // --- SCRIPT UNTUK VIDEO PLAYER ---
         const videoLinks = document.querySelectorAll('.video-title-link');
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
+
         videoLinks.forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
