@@ -4,45 +4,149 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Materi Premium - Fluent Voices</title>
-    <link rel="stylesheet" href="style.css"> 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@24..48,200..800&display=swap" rel="stylesheet">
+    
     <style>
-        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; min-height: 100vh; background-color: #f0f2f5; margin: 0; padding: 1rem; }
-        .login-container { display: block; background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 100%;}
-        .login-container h2 { margin-top: 0; color: #333; }
+        /* === DESAIN & ANIMASI BARU === */
+
+        :root {
+            --blue: #0044f1;
+            --light-bg: #f8f9fa;
+            --dark-text: #1a1a1a;
+        }
+
+        body { 
+            font-family: 'Bricolage Grotesque', sans-serif; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            min-height: 100vh; 
+            background-color: #f0f2f5; 
+            margin: 0; 
+            padding: 1rem;
+        }
+        .login-container { 
+            display: block; 
+            background-color: white; 
+            padding: 40px; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1); 
+            text-align: center; 
+            max-width: 400px; 
+            width: 100%;
+        }
+        .login-container h2 { 
+            margin-top: 0; 
+            color: var(--dark-text); 
+            font-weight: 600;
+        }
         .login-container p { color: #666; }
-        .login-container input { width: 100%; padding: 12px; margin-top: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .login-container button { width: 100%; padding: 12px; margin-top: 15px; background-color: #0044f1; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .login-container input { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 15px; 
+            border: 1px solid #ddd; 
+            border-radius: 8px; 
+            box-sizing: border-box; 
+            font-family: 'Bricolage Grotesque', sans-serif;
+            font-size: 1rem;
+        }
+        .login-container button { 
+            width: 100%; 
+            padding: 12px; 
+            margin-top: 15px; 
+            background-color: var(--blue); 
+            color: white; 
+            border: none; 
+            border-radius: 8px; 
+            cursor: pointer; 
+            font-size: 16px;
+            font-weight: 600;
+            transition: transform 0.2s ease;
+        }
+        .login-container button:hover { transform: scale(1.02); }
         .login-container .error { color: red; margin-top: 10px; font-size: 14px; visibility: hidden; }
         
-        /* Konten Materi (Awalnya tersembunyi) */
-        .materi-container { display: none; max-width: 800px; margin: 0 auto; padding: 2rem; text-align: left; background-color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+        /* Konten Materi */
+        .materi-container { 
+            display: none; 
+            max-width: 800px; 
+            margin: 0 auto; 
+            padding: 2rem; 
+            text-align: left; 
+            background-color: white; 
+            border-radius: 12px; 
+            box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+        }
         .modul { margin-bottom: 2.5rem; }
-        .modul h3 { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee; color: #0044f1; }
+        .modul h3 { 
+            font-size: 1.8rem; 
+            margin-bottom: 1.5rem; 
+            padding-bottom: 0.75rem; 
+            border-bottom: 1px solid #eee; 
+            color: var(--blue);
+            font-weight: 600;
+        }
         
-        /* ### GAYA BARU UNTUK JUDUL VIDEO ### */
+        /* Desain Baru Tombol Judul Video */
         .video-title-link {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             text-decoration: none;
-            color: #1a1a1a;
+            color: var(--dark-text);
             font-size: 1.1rem;
             font-weight: 600;
-            padding: 12px 15px;
-            background-color: #f8f9fa;
+            padding: 15px;
+            background-color: white;
             border: 1px solid #e0e0e0;
-            border-radius: 5px;
+            border-radius: 8px;
             margin-bottom: 8px;
-            transition: background-color 0.2s, color 0.2s;
+            transition: all 0.2s ease-in-out;
             cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
         }
         .video-title-link:hover {
-            background-color: #e9ecef;
-            color: #0044f1;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            color: var(--blue);
         }
-        
-        .video-placeholder {
-            margin-bottom: 1.5rem;
+        .video-title-link.active { /* Gaya untuk judul yang sedang aktif */
+            background-color: #f0f6ff;
+            border-color: var(--blue);
+            color: var(--blue);
         }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; }
+        .video-title-link .play-icon { /* Gaya untuk ikon play */
+            width: 20px;
+            height: 20px;
+            flex-shrink: 0;
+            fill: #aaa;
+            transition: fill 0.2s ease-in-out;
+        }
+        .video-title-link:hover .play-icon, .video-title-link.active .play-icon {
+            fill: var(--blue);
+        }
+
+        .video-placeholder { margin-bottom: 1.5rem; }
+        .video-container { 
+            position: relative; 
+            padding-bottom: 56.25%; 
+            height: 0; 
+            overflow: hidden; 
+            max-width: 100%; 
+            background: #000; 
+            border-radius: 12px; 
+            /* Properti untuk animasi */
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .video-container.visible { /* Kelas untuk memicu animasi */
+            opacity: 1;
+            transform: translateY(0);
+        }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
 </head>
@@ -60,24 +164,36 @@
     </div>
 
     <div id="materiSection" class="materi-container">
-        <h2 style="text-align: center;">Materi Pembelajaran Fluent Voices</h2>
+        <h2 style="text-align: center;">Materi Pembelajaran</h2>
         <p style="text-align: center;">Selamat datang! Silakan klik judul di bawah untuk memulai video.</p>
         
         <div class="modul">
             <h3>Modul 1: Getting Started</h3>
-            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">1.1 - Welcome & Introduction</a>
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
+                <span>1.1 - Welcome & Introduction</span>
+            </a>
             <div class="video-placeholder"></div>
 
-            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/VIDEO_ID_LAINNYA_1">1.2 - Course Objectives</a>
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
+                <span>1.2 - Course Objectives</span>
+            </a>
             <div class="video-placeholder"></div>
         </div>
 
         <div class="modul">
             <h3>Modul 2: Basic Conversation</h3>
-            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/VIDEO_ID_LAINNYA_2">2.1 - Greetings and Farewells</a>
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
+                <span>2.1 - Greetings and Farewells</span>
+            </a>
             <div class="video-placeholder"></div>
 
-            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/VIDEO_ID_LAINNYA_3">2.2 - Asking "How are you?"</a>
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">
+                <svg class="play-icon" viewBox="0 0 24 24"><path d="M8,5.14V19.14L19,12.14L8,5.14Z" /></svg>
+                <span>2.2 - Asking "How are you?"</span>
+            </a>
             <div class="video-placeholder"></div>
         </div>
     </div>
@@ -99,7 +215,7 @@
             }
         });
 
-        // ### JAVASCRIPT BARU UNTUK MEMBUAT VIDEO SAAT DIKLIK ###
+        // JavaScript untuk Membuat Video Saat Diklik
         const videoLinks = document.querySelectorAll('.video-title-link');
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
 
@@ -107,28 +223,35 @@
             link.addEventListener('click', function(event) {
                 event.preventDefault();
 
-                // Kosongkan semua placeholder video terlebih dahulu
-                videoPlaceholders.forEach(placeholder => {
-                    placeholder.innerHTML = '';
-                });
+                const wasActive = this.classList.contains('active');
 
-                const videoSrc = this.getAttribute('data-video-src');
-                const targetPlaceholder = this.nextElementSibling; // Menargetkan div placeholder tepat di bawah link yang diklik
+                // Hapus status aktif dari semua link dan kosongkan placeholder
+                videoLinks.forEach(l => l.classList.remove('active'));
+                videoPlaceholders.forEach(p => p.innerHTML = '');
 
-                if (videoSrc) {
-                    const iframeHTML = `
-                        <div class="video-container">
+                // Jika link yang diklik sebelumnya tidak aktif, maka aktifkan dan tampilkan video
+                if (!wasActive) {
+                    this.classList.add('active'); // Tandai link ini sebagai aktif
+                    const videoSrc = this.getAttribute('data-video-src');
+                    const targetPlaceholder = this.nextElementSibling;
+
+                    if (videoSrc) {
+                        const iframeHTML = `<div class="video-container" id="current-video">${/* Iframe content */}</div>`;
+                        targetPlaceholder.innerHTML = iframeHTML.replace('{/* Iframe content */}', `
                             <iframe 
-                                src="${videoSrc}" 
+                                src="${videoSrc}?autoplay=1" 
                                 title="YouTube video player" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
                                 allowfullscreen>
-                            </iframe>
-                        </div>
-                    `;
-                    targetPlaceholder.innerHTML = iframeHTML;
+                            </iframe>`);
+                        
+                        // Beri jeda sesaat agar transisi CSS bisa berjalan
+                        setTimeout(() => {
+                            document.getElementById('current-video').classList.add('visible');
+                        }, 10);
+                    }
                 }
             });
         });
