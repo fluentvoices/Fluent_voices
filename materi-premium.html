@@ -25,6 +25,8 @@
             margin: 0; 
             padding: 1rem;
         }
+        
+        /* Animasi Masuk untuk Kotak Login */
         .login-container { 
             display: block; 
             background-color: white; 
@@ -34,7 +36,16 @@
             text-align: center; 
             max-width: 400px; 
             width: 100%;
+            /* Properti Awal Animasi */
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.5s ease-out, transform 0.5s ease-out;
         }
+        .login-container.visible { /* Kelas untuk memicu animasi */
+            opacity: 1;
+            transform: scale(1);
+        }
+
         .login-container h2 { 
             margin-top: 0; 
             color: var(--dark-text); 
@@ -66,6 +77,24 @@
         }
         .login-container button:hover { transform: scale(1.02); }
         .login-container .error { color: red; margin-top: 10px; font-size: 14px; visibility: hidden; }
+
+        /* CSS untuk Ikon Mata */
+        .password-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .password-wrapper input {
+            padding-right: 45px;
+        }
+        .toggle-icon {
+            position: absolute;
+            top: 50%;
+            right: 15px;
+            transform: translateY(-50%);
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+        }
         
         /* Konten Materi */
         .materi-container { 
@@ -154,7 +183,13 @@
         <p>Silakan login untuk melanjutkan.</p>
         <form id="loginForm">
             <input type="text" id="username" placeholder="Username" required>
-            <input type="password" id="password" placeholder="Password" required>
+            <div class="password-wrapper">
+                <input type="password" id="password" placeholder="Password" required>
+                <span id="togglePassword" class="toggle-icon">
+                    <svg id="eye-open" fill="#888" viewBox="0 0 24 24"><path d="M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9M12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17M12,4.5C7,4.5 2.73,7.61 1,12C2.73,16.39 7,19.5 12,19.5C17,19.5 21.27,16.39 23,12C21.27,7.61 17,4.5 12,4.5Z" /></svg>
+                    <svg id="eye-closed" fill="#888" style="display: none;" viewBox="0 0 24 24"><path d="M12,7A5,5 0 0,1 17,12C17,12.23 16.98,12.45 16.93,12.68L19.71,15.46C21.39,14.07 22.85,12.16 23,12C21.27,7.61 17,4.5 12,4.5C10.5,4.5 9.09,4.89 7.82,5.56L9.33,7.07C9.8,6.72 10.37,6.5 11,6.5C11.33,6.5 11.66,6.56 12,6.68L12.72,7.4C12.45,7.18 12.23,7.09 12,7M2.39,4.27L1.11,5.54L4.29,8.71C2.84,9.88 1.6,11.5 1,12C2.73,16.39 7,19.5 12,19.5C13.55,19.5 15,19.14 16.33,18.45L19.46,21.58L20.73,20.31L2.39,4.27M12,17A5,5 0 0,1 7,12C7,11.16 7.24,10.38 7.64,9.7L14.3,16.36C13.62,16.76 12.84,17 12,17Z" /></svg>
+                </span>
+            </div>
             <button type="submit">Masuk</button>
         </form>
         <p id="errorMessage" class="error">Username atau Password salah.</p>
@@ -196,15 +231,25 @@
     </div>
 
     <script>
-        // Cek status login saat halaman pertama kali dimuat
         document.addEventListener('DOMContentLoaded', function() {
-            if (sessionStorage.getItem('isLoggedIn') === 'true') {
-                document.getElementById('loginSection').style.display = 'none';
-                document.getElementById('materiSection').style.display = 'block';
+            const loginTimestamp = localStorage.getItem('loginTimestamp');
+            const loginSection = document.getElementById('loginSection');
+            const materiSection = document.getElementById('materiSection');
+            if (loginTimestamp) {
+                const now = new Date().getTime();
+                const oneMonthInMs = 30 * 24 * 60 * 60 * 1000;
+                if (now - loginTimestamp < oneMonthInMs) {
+                    loginSection.style.display = 'none';
+                    materiSection.style.display = 'block';
+                } else {
+                    localStorage.removeItem('loginTimestamp');
+                    loginSection.classList.add('visible');
+                }
+            } else {
+                loginSection.classList.add('visible');
             }
         });
 
-        // Logika untuk form Login saat tombol diklik
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const usernameRahasia = 'fluentuser';
@@ -213,7 +258,7 @@
             const passwordInput = document.getElementById('password').value;
             
             if (usernameInput === usernameRahasia && passwordInput === passwordRahasia) {
-                sessionStorage.setItem('isLoggedIn', 'true');
+                localStorage.setItem('loginTimestamp', new Date().getTime());
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('materiSection').style.display = 'block';
             } else {
@@ -221,10 +266,24 @@
             }
         });
 
-        // JavaScript untuk Membuat Video Saat Diklik
+        const togglePassword = document.getElementById('togglePassword');
+        const passwordInput = document.getElementById('password');
+        const eyeOpen = document.getElementById('eye-open');
+        const eyeClosed = document.getElementById('eye-closed');
+        togglePassword.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+            passwordInput.setAttribute('type', type);
+            if (type === 'password') {
+                eyeOpen.style.display = 'block';
+                eyeClosed.style.display = 'none';
+            } else {
+                eyeOpen.style.display = 'none';
+                eyeClosed.style.display = 'block';
+            }
+        });
+
         const videoLinks = document.querySelectorAll('.video-title-link');
         const videoPlaceholders = document.querySelectorAll('.video-placeholder');
-
         videoLinks.forEach(link => {
             link.addEventListener('click', function(event) {
                 event.preventDefault();
@@ -249,7 +308,6 @@
                             </div>
                         `;
                         targetPlaceholder.innerHTML = finalHTML;
-                        
                         setTimeout(() => {
                             const currentVideo = document.getElementById('current-video');
                             if (currentVideo) {
