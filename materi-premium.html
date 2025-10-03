@@ -10,16 +10,39 @@
         .login-container { display: block; background-color: white; padding: 40px; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; max-width: 400px; width: 100%;}
         .login-container h2 { margin-top: 0; color: #333; }
         .login-container p { color: #666; }
-        .login-container input[type="password"] { width: 100%; padding: 12px; margin: 15px 0; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
-        .login-container button { width: 100%; padding: 12px; background-color: #0044f1; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
+        .login-container input { width: 100%; padding: 12px; margin-top: 15px; border: 1px solid #ddd; border-radius: 4px; box-sizing: border-box; }
+        .login-container button { width: 100%; padding: 12px; margin-top: 15px; background-color: #0044f1; color: white; border: none; border-radius: 4px; cursor: pointer; font-size: 16px; }
         .login-container .error { color: red; margin-top: 10px; font-size: 14px; visibility: hidden; }
         
         /* Konten Materi (Awalnya tersembunyi) */
         .materi-container { display: none; max-width: 800px; margin: 0 auto; padding: 2rem; text-align: left; background-color: white; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
         .modul { margin-bottom: 2.5rem; }
         .modul h3 { font-size: 1.5rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 2px solid #eee; color: #0044f1; }
-        .video-title { font-size: 1.1rem; font-weight: 600; margin-bottom: 0.75rem; }
-        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; margin-bottom: 1.5rem; }
+        
+        /* ### GAYA BARU UNTUK JUDUL VIDEO ### */
+        .video-title-link {
+            display: block;
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 1.1rem;
+            font-weight: 600;
+            padding: 12px 15px;
+            background-color: #f8f9fa;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            margin-bottom: 8px;
+            transition: background-color 0.2s, color 0.2s;
+            cursor: pointer;
+        }
+        .video-title-link:hover {
+            background-color: #e9ecef;
+            color: #0044f1;
+        }
+        
+        .video-placeholder {
+            margin-bottom: 1.5rem;
+        }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; border-radius: 8px; }
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
     </style>
 </head>
@@ -27,51 +50,87 @@
 
     <div id="loginSection" class="login-container">
         <h2>Akses Materi Premium</h2>
-        <p>Silakan masukkan password untuk melanjutkan.</p>
+        <p>Silakan login untuk melanjutkan.</p>
         <form id="loginForm">
+            <input type="text" id="username" placeholder="Username" required>
             <input type="password" id="password" placeholder="Password" required>
             <button type="submit">Masuk</button>
         </form>
-        <p id="errorMessage" class="error">Password salah. Silakan coba lagi.</p>
+        <p id="errorMessage" class="error">Username atau Password salah.</p>
     </div>
 
     <div id="materiSection" class="materi-container">
         <h2 style="text-align: center;">Materi Pembelajaran Fluent Voices</h2>
-        <p style="text-align: center;">Selamat datang di ruang belajar premium! Video bisa langsung diputar di bawah ini.</p>
+        <p style="text-align: center;">Selamat datang! Silakan klik judul di bawah untuk memulai video.</p>
+        
         <div class="modul">
             <h3>Modul 1: Getting Started</h3>
-            <p class="video-title">1.1 - Welcome & Introduction</p>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
-            <p class="video-title">1.2 - Course Objectives</p>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i">1.1 - Welcome & Introduction</a>
+            <div class="video-placeholder"></div>
+
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/VIDEO_ID_LAINNYA_1">1.2 - Course Objectives</a>
+            <div class="video-placeholder"></div>
         </div>
+
         <div class="modul">
             <h3>Modul 2: Basic Conversation</h3>
-            <p class="video-title">2.1 - Greetings and Farewells</p>
-            <div class="video-container">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/2Q8sWoYfwko?si=KfdSyC2vaPTSAX-i" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            </div>
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/VIDEO_ID_LAINNYA_2">2.1 - Greetings and Farewells</a>
+            <div class="video-placeholder"></div>
+
+            <a class="video-title-link" data-video-src="https://www.youtube.com/embed/VIDEO_ID_LAINNYA_3">2.2 - Asking "How are you?"</a>
+            <div class="video-placeholder"></div>
         </div>
     </div>
 
     <script>
+        // Logika untuk Login
         document.getElementById('loginForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const passwordRahasia = 'Fluent123'; // GANTI PASSWORD ANDA DI SINI
+            const usernameRahasia = 'fluentuser';
+            const passwordRahasia = 'Fluent123';
+            const usernameInput = document.getElementById('username').value;
             const passwordInput = document.getElementById('password').value;
             
-            if (passwordInput === passwordRahasia) {
-                // Jika password benar, sembunyikan login dan tampilkan materi
+            if (usernameInput === usernameRahasia && passwordInput === passwordRahasia) {
                 document.getElementById('loginSection').style.display = 'none';
                 document.getElementById('materiSection').style.display = 'block';
             } else {
-                // Jika password salah, tampilkan pesan error
                 document.getElementById('errorMessage').style.visibility = 'visible';
             }
+        });
+
+        // ### JAVASCRIPT BARU UNTUK MEMBUAT VIDEO SAAT DIKLIK ###
+        const videoLinks = document.querySelectorAll('.video-title-link');
+        const videoPlaceholders = document.querySelectorAll('.video-placeholder');
+
+        videoLinks.forEach(link => {
+            link.addEventListener('click', function(event) {
+                event.preventDefault();
+
+                // Kosongkan semua placeholder video terlebih dahulu
+                videoPlaceholders.forEach(placeholder => {
+                    placeholder.innerHTML = '';
+                });
+
+                const videoSrc = this.getAttribute('data-video-src');
+                const targetPlaceholder = this.nextElementSibling; // Menargetkan div placeholder tepat di bawah link yang diklik
+
+                if (videoSrc) {
+                    const iframeHTML = `
+                        <div class="video-container">
+                            <iframe 
+                                src="${videoSrc}" 
+                                title="YouTube video player" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>
+                        </div>
+                    `;
+                    targetPlaceholder.innerHTML = iframeHTML;
+                }
+            });
         });
     </script>
 
