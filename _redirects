@@ -6,13 +6,13 @@
 /reportcardaugust   https://docs.google.com/forms/d/e/1FAIpQLSeJ401oup7bgpLeKG5HBVHpiyzIuQukY5CvUf2wJkEnIonkEA/viewform?usp=dialog   301
 /reportcardseptember   https://docs.google.com/forms/d/e/1FAIpQLSeJ401oup7bgpLeKG5HBVHpiyzIuQukY5CvUf2wJkEnIonkEA/viewform?usp=dialog   301
 
-# === ATURAN FINAL YANG PALING TEGAS ===
+# === ATURAN FINAL YANG SUDAH DIPERBAIKI ===
 
-# 1. Jaga akses langsung ke file .html
-#    Jika pengguna TIDAK punya peran premium, paksa lempar ke halaman utama.
-/materi-premium.html   /   302!   Role=!premium
+# 1. Jaga PINTU DEPAN (/materi-premium). Ini adalah satu-satunya aturan yang dibutuhkan.
+#    Hanya izinkan pengguna dengan peran "premium" untuk melihat kontennya.
+#    Jika tidak, Netlify akan otomatis menampilkan pop-up login.
+/materi-premium   /materi-premium.html   200!   Role=premium
 
-# 2. Jaga akses ke URL cantik (/materi-premium)
-#    Aturan ini akan menangani pengguna yang sudah login untuk melihat konten
-#    dan juga melempar yang belum login (karena aturan di atas).
-/materi-premium   /materi-premium.html   200!
+# 2. TUTUP PINTU BELAKANG (/materi-premium.html).
+#    Paksa siapa pun yang mengakses file .html secara langsung untuk pindah ke pintu depan.
+/materi-premium.html   /materi-premium   301!
